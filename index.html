@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Be-mean-instagram-artigos by ravenNNN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Be-mean-instagram-artigos</h1>
+      <h2 class="project-tagline">Artigos dos alunos do curso Be MEAN Instagram</h2>
+      <a href="https://github.com/ravenNNN/be-mean-instagram-artigos" class="btn">View on GitHub</a>
+      <a href="https://github.com/ravenNNN/be-mean-instagram-artigos/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/ravenNNN/be-mean-instagram-artigos/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="artigo" class="anchor" href="#artigo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Artigo</h1>
+
+<p><strong>autor</strong>: ravenNNN - Baltazar Parra</p>
+
+<h2>
+<a id="hoisting" class="anchor" href="#hoisting" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hoisting</h2>
+
+<p>Em JavaScript antes do nosso código ser executado, ele é lido por inteiro. Nessa hora, todas nossas variáveis e funções,
+são içadas até o topo do nosso escopo, só então a execução de fato acontece. Isso é o que chamamos de Hoisting.</p>
+
+<p>Explicando melhor:</p>
+
+<p>Sempre que criamos uma variável, ela é içada para o topo do nosso escopo, antes mesmo do nosso código ser executado, ou seja,
+ela não chega a receber nenhum valor nessa fase, permanecendo indefinida.</p>
+
+<pre><code>    valor = 666;
+    var valor;
+
+    // Como nossas variáveis são içadas antes da execução do código
+    // Ela será interpretada assim
+
+    var valor; // undefined
+    valor = 666;
+
+</code></pre>
+
+<p>Já com as declarações de funções é um pouco diferente, não é somente o nome que é içado, neste caso todo corpo da nossa declaração é levado para o topo.</p>
+
+<pre><code>    coisada(); // vai printar "mensagem coisada"
+               // Porque ali em baixo eu vou criar a função
+
+    function coisada() {
+      console.log("mensagem coisada");
+    }
+
+    // Como nas funções, são içadas o corpo e não somente o nome
+    // Eu posso chamar ela em qualquer lugar do código
+    // Mesmo não fazendo nenhum sentido aparente.
+
+</code></pre>
+
+<p>Obs. No caso das expressões, ela vai se comportar como as variáveis, tendo somente seu nome içado.</p>
+
+<h2>
+<a id="closure" class="anchor" href="#closure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Closure</h2>
+
+<p>Antes de falar sobre as closures, você precisar entender o escopo das variáveis.
+O escopo nada mais é que, o ambiente onde você declarou sua variável,
+esse ambiente demarca o limite onde você pode usar sua variável.</p>
+
+<p>Simplificando, closure é uma função interna, que te permite acessar variáveis externas.</p>
+
+<pre><code>    function zeRuela (nomeDoRuela, sobrenomeDoRuela) {
+        var chamada = "Eu sou o ";
+
+    // Função externa, com variáveis externas.    
+
+        function nomeInteiro () {
+            return chamada + nomeDoRuela + " " + sobrenomeDoRuela;
+        }
+            return nomeInteiro ();
+            }
+
+    // Função interna, que tem acesso as variáveis da função externa.
+    // Isso é oque chamamos de closure, Ela pode acessar tanto as variáveis,
+    // quanto os paramêtros do lado de fora.
+
+
+    zeRuela ("Jose", "Arruelo"); // Eu sou o Jose Arruelo
+</code></pre>
+
+<p>Ai em cima temos uma função dentro de outra função, onde a função que está dentro, tem acessos a dados da função que está fora, isso é oque podemos chamar de closure.</p>
+
+<ul>
+<li>Beleza, e eu uso isso pra'quê?</li>
+</ul>
+
+<p>Para construir variáveis privadas ué.</p>
+
+<p>Uma função pode acessar todas variáveis criadas dentro dela, e com as closures podemos acessar também variáveis criadas do lado de fora,
+sem bagunçar nosso escopo global deixando nosso código mais inteligivel.</p>
+
+<h2>
+<a id="variável-global" class="anchor" href="#vari%C3%A1vel-global" aria-hidden="true"><span class="octicon octicon-link"></span></a>Variável Global</h2>
+
+<p>Para chamar uma variável global dentro de uma função, obviamente declaramos ela em escopo global, e depois chamamos ela dentro da nossa função.</p>
+
+<pre><code>var global = 3;
+
+function chamada() {
+  return global * 2;
+}
+
+chamada(); // 6
+</code></pre>
+
+<h2>
+<a id="variável-por-parâmetro" class="anchor" href="#vari%C3%A1vel-por-par%C3%A2metro" aria-hidden="true"><span class="octicon octicon-link"></span></a>Variável por parâmetro</h2>
+
+<p>Passando nosso parâmetro por meio de uma variável, ela vai ficar responsável em fazer o transporte do nosso argumento.</p>
+
+<pre><code>    var valor = 5;
+
+    function pegaValor(parametro) {
+        alert(parametro);
+    }
+
+    pegaValor(valor); // 5
+
+    // Passamos uma variavel como parametro
+
+    valor = 12;
+
+    pegaValor(valor); // 12
+
+    // Mudando o argumento da função.
+</code></pre>
+
+<p>Criamos uma variável com o valor 5 e chamamos nossa função passando esta variável como parâmetro, depois alteramos nosso argumento trocando o valor da nossa variável.</p>
+
+<h2>
+<a id="instanciação-usando-uma-iife" class="anchor" href="#instancia%C3%A7%C3%A3o-usando-uma-iife" aria-hidden="true"><span class="octicon octicon-link"></span></a>Instanciação usando uma IIFE</h2>
+
+<p>Até o ano de 2010, davamos o nome de self-executing anonymous function, para funções executadas no momento em que eram definidas.</p>
+
+<pre><code>    (function () {
+        console.log('E ae, meu nome é Self-Executing Anonynous Function, Prazer')
+    }())
+</code></pre>
+
+<p>Até que um cara chamado Cowboy (Ben Alman) publicou um <a href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/">longo artigo</a> sobre como não concordava com esse nome,
+cunhando o termo IIFE.</p>
+
+<p>(Artigo em Desenvolvimento...)</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/ravenNNN/be-mean-instagram-artigos">Be-mean-instagram-artigos</a> is maintained by <a href="https://github.com/ravenNNN">ravenNNN</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
